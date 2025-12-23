@@ -1,0 +1,757 @@
+{% extends "base.html" %}
+
+{% block title %}Risk Assessment Result - Dengue Risk System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="card mb-4">
+                <div class="card-header bg-{{ result.risk_color }} {% if result.risk_color == 'warning' %}text-dark{% else %}text-white{% endif %}">
+                    <h2 class="card-title mb-0">
+                        <i class="fas fa-chart-pie me-3"></i>
+                        {{ module }} - Risk Assessment Result
+                    </h2>
+                </div>
+                <div class="card-body text-center">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            {% if result.risk_level == 'High' or result.risk_level == 'Very High' %}
+                                <i class="fas fa-exclamation-triangle fa-5x text-danger"></i>
+                            {% elif result.risk_level == 'Medium' %}
+                                <i class="fas fa-exclamation-circle fa-5x text-warning"></i>
+                            {% elif result.risk_level == 'Low-Medium' %}
+                                <i class="fas fa-info-circle fa-5x text-info"></i>
+                            {% else %}
+                                <i class="fas fa-check-circle fa-5x text-success"></i>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8 text-start">
+                            <h1 class="display-4 fw-bold text-{{ result.risk_color }}">
+                                {{ result.risk_level }} Risk
+                            </h1>
+                            {% if result.urgency %}
+                                <p class="lead text-muted">{{ result.urgency }}</p>
+                            {% endif %}
+                            {% if result.timestamp %}
+                                <small class="text-muted">
+                                    <i class="fas fa-clock me-1"></i>
+                                    Assessment completed: {{ result.timestamp }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Data (for weather prediction module) -->
+            {% if result.weather_data %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cloud-sun me-2"></i>
+                            Current Weather Conditions - {{ result.weather_data.city }}, {{ result.weather_data.country }}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-thermometer-half fa-2x text-danger mb-2"></i>
+                                        <h6>Temperature</h6>
+                                        <h4 class="text-danger">{{ "%.1f"|format(result.weather_data.temperature) }}°C</h4>
+                                        <small class="text-muted">Feels like {{ "%.1f"|format(result.weather_data.feels_like) }}°C</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-tint fa-2x text-info mb-2"></i>
+                                        <h6>Humidity</h6>
+                                        <h4 class="text-info">{{ result.weather_data.humidity }}%</h4>
+                                        <small class="text-muted">Relative humidity</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-eye fa-2x text-secondary mb-2"></i>
+                                        <h6>Conditions</h6>
+                                        <h6 class="text-secondary text-capitalize">{{ result.weather_data.description }}</h6>
+                                        <small class="text-muted">Current weather</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-weight fa-2x text-primary mb-2"></i>
+                                        <h6>Pressure</h6>
+                                        <h4 class="text-primary">{{ result.weather_data.pressure }}</h4>
+                                        <small class="text-muted">hPa</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Symptoms Summary (for symptom checker module) -->
+            {% if result.present_symptoms %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-stethoscope me-2"></i>
+                            Reported Symptoms (Score: {{ result.total_score }}/16)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% if result.present_symptoms %}
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6>Present Symptoms:</h6>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        {% for symptom in result.present_symptoms %}
+                                            <span class="badge bg-secondary">{{ symptom }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% if result.warning_signs %}
+                                    <div class="col-md-4">
+                                        <h6 class="text-danger">Warning Signs:</h6>
+                                        {% for sign in result.warning_signs %}
+                                            <span class="badge bg-danger">{{ sign }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if result.who_notes %}
+                                <hr>
+                                <h6>WHO Assessment Notes:</h6>
+                                <ul class="mb-0">
+                                    {% for note in result.who_notes %}
+                                        <li>{{ note }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% else %}
+                            <p class="text-muted mb-0">No symptoms reported.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Location Information (for local alert module) -->
+            {% if result.alert_message %}
+                <div class="card mb-4">
+                    <div class="card-header bg-{{ result.risk_color }} {% if result.risk_color == 'warning' %}text-dark{% else %}text-white{% endif %}">
+                        <h5 class="mb-0">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Local Dengue Alert System
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Main Alert Message -->
+                        <div class="alert alert-{{ result.risk_color }} {% if result.risk_color == 'warning' %}text-dark{% endif %} mb-4">
+                            <h4 class="alert-heading">{{ result.alert_message }}</h4>
+                            <p class="mb-0">{{ result.risk_description }}</p>
+                        </div>
+
+                        <!-- Modern Analytics Dashboard -->
+                        {% if result.analytics %}
+                        <div class="row mb-4">
+                            <!-- Total Cases Card -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 shadow-sm border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div class="card-body text-white text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                            <i class="fas fa-virus fa-2x me-2"></i>
+                                            <div>
+                                                <h3 class="mb-0 fw-bold">{{ result.total_cases }}</h3>
+                                                <small class="opacity-75">Total Cases</small>
+                                            </div>
+                                        </div>
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%; opacity: 0.3;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Daily Average Card -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 shadow-sm border-0" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div class="card-body text-white text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                            <i class="fas fa-chart-line fa-2x me-2"></i>
+                                            <div>
+                                                <h3 class="mb-0 fw-bold">{{ result.analytics.daily_average }}</h3>
+                                                <small class="opacity-75">Daily Average</small>
+                                            </div>
+                                        </div>
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ (result.analytics.daily_average / result.analytics.max_single_day * 100)|round|int }}%; opacity: 0.3;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Peak Day Cases Card -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 shadow-sm border-0" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div class="card-body text-white text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                            <i class="fas fa-exclamation-triangle fa-2x me-2"></i>
+                                            <div>
+                                                <h3 class="mb-0 fw-bold">{{ result.analytics.max_single_day }}</h3>
+                                                <small class="opacity-75">Peak Day Cases</small>
+                                            </div>
+                                        </div>
+                                        <div class="progress mt-2" style="height: 4px;">
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%; opacity: 0.3;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Trend Status Card -->
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 shadow-sm border-0 bg-light">
+                                    <div class="card-body text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                            {% if result.analytics.trend_icon == 'up-fast' %}
+                                                <i class="fas fa-arrow-up text-danger fa-2x me-2"></i>
+                                            {% elif result.analytics.trend_icon == 'up' %}
+                                                <i class="fas fa-arrow-up text-warning fa-2x me-2"></i>
+                                            {% elif result.analytics.trend_icon == 'down-fast' %}
+                                                <i class="fas fa-arrow-down text-success fa-2x me-2"></i>
+                                            {% elif result.analytics.trend_icon == 'down' %}
+                                                <i class="fas fa-arrow-down text-info fa-2x me-2"></i>
+                                            {% elif result.analytics.trend_icon == 'stable' %}
+                                                <i class="fas fa-minus text-secondary fa-2x me-2"></i>
+                                            {% else %}
+                                                <i class="fas fa-chart-line text-muted fa-2x me-2"></i>
+                                            {% endif %}
+                                            <div>
+                                                <h6 class="mb-0 fw-bold text-dark">{{ "%.1f"|format(result.analytics.trend_change) }}%</h6>
+                                                <small class="text-muted">Weekly Change</small>
+                                            </div>
+                                        </div>
+                                        <small class="d-block mt-2 text-muted">{{ result.analytics.trend_status }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Trend Analysis -->
+                        <div class="card shadow-sm border-0 mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="card-header bg-transparent border-0 text-white">
+                                <h5 class="mb-0"><i class="fas fa-chart-area me-2"></i>Advanced Analytics & Insights</h5>
+                            </div>
+                            <div class="card-body bg-white">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-primary rounded-circle p-3 me-3">
+                                                <i class="fas fa-trending-up text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-dark">7-Day Trend Analysis</h6>
+                                                <p class="text-muted mb-0">{{ result.analytics.trend_status }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-info rounded-circle p-3 me-3">
+                                                <i class="fas fa-calendar-week text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-dark">Peak Activity Day</h6>
+                                                <p class="text-muted mb-0">{{ result.analytics.peak_day }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-warning rounded-circle p-3 me-3">
+                                                <i class="fas fa-database text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-dark">Data Coverage</h6>
+                                                <p class="text-muted mb-0">{{ result.analytics.data_points }} records analyzed</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-success rounded-circle p-3 me-3">
+                                                <i class="fas fa-clock text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-dark">Analysis Period</h6>
+                                                <p class="text-muted mb-0">{{ result.analytics.date_range }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% if result.analytics.trend_change != 0 %}
+                                <div class="mt-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-bold text-dark">Weekly Change Indicator</span>
+                                        <span class="badge {% if result.analytics.trend_change > 0 %}bg-danger{% else %}bg-success{% endif %} fs-6">
+                                            {{ result.analytics.trend_change }}% 
+                                            {% if result.analytics.trend_change > 0 %}↗️{% else %}↘️{% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar {% if result.analytics.trend_change > 0 %}bg-danger{% else %}bg-success{% endif %}" 
+                                             role="progressbar"
+                                             style="width: {% if result.analytics.trend_change|abs > 100 %}100{% else %}{{ result.analytics.trend_change|abs }}{% endif %}%">
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <small class="text-muted">
+                                            {% if result.analytics.trend_change > 20 %}
+                                                🚨 Rapid increase detected - Immediate action required
+                                            {% elif result.analytics.trend_change > 5 %}
+                                                ⚠️ Cases are rising - Enhanced monitoring needed
+                                            {% elif result.analytics.trend_change < -20 %}
+                                                ✅ Significant decrease - Interventions effective
+                                            {% elif result.analytics.trend_change < -5 %}
+                                                📉 Cases declining - Continue current measures
+                                            {% else %}
+                                                ➡️ Stable trend - Maintain vigilance
+                                            {% endif %}
+                                        </small>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Recent Cases Data -->
+                        {% if result.recent_data %}
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border: none;">
+                                <h6 class="mb-0 text-white"><i class="fas fa-calendar-alt me-2"></i>Daily Case Breakdown</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="border-0 py-3 px-4">Date</th>
+                                                <th class="border-0 py-3 px-4">Day</th>
+                                                <th class="border-0 py-3 px-4">Cases</th>
+                                                <th class="border-0 py-3 px-4">Visual</th>
+                                                <th class="border-0 py-3 px-4">Risk Level</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for day_data in result.recent_data %}
+                                            <tr class="border-bottom">
+                                                <td class="px-4 py-3">
+                                                    <span class="fw-bold text-dark">{{ day_data.date[:10] }}</span>
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    <span class="badge bg-light text-dark">{{ day_data.day }}</span>
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="badge fs-6 me-2
+                                                            {% if day_data.cases >= 40 %}bg-danger
+                                                            {% elif day_data.cases >= 25 %}bg-warning text-dark
+                                                            {% elif day_data.cases >= 15 %}bg-info
+                                                            {% else %}bg-success{% endif %}">
+                                                            {{ day_data.cases }}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    <div class="progress" style="height: 8px; width: 80px;">
+                                                        <div class="progress-bar 
+                                                            {% if day_data.cases >= 40 %}bg-danger
+                                                            {% elif day_data.cases >= 25 %}bg-warning
+                                                            {% elif day_data.cases >= 15 %}bg-info
+                                                            {% else %}bg-success{% endif %}" 
+                                                             role="progressbar" 
+                                                             style="width: {{ (day_data.cases / result.analytics.max_single_day * 100)|round|int }}%">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    {% if day_data.cases >= 40 %}
+                                                        <span class="text-danger fw-bold">Critical</span>
+                                                    {% elif day_data.cases >= 25 %}
+                                                        <span class="text-warning fw-bold">High</span>
+                                                    {% elif day_data.cases >= 15 %}
+                                                        <span class="text-info fw-bold">Moderate</span>
+                                                    {% else %}
+                                                        <span class="text-success fw-bold">Low</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Summary Statistics -->
+                                <div class="card-footer bg-light border-0">
+                                    <div class="row text-center">
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block">Highest Day</small>
+                                            <span class="fw-bold text-danger">{{ result.analytics.max_single_day }} cases</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block">Lowest Day</small>
+                                            <span class="fw-bold text-success">{{ result.analytics.min_single_day }} cases</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block">Average</small>
+                                            <span class="fw-bold text-info">{{ result.analytics.daily_average }} cases/day</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block">Total Period</small>
+                                            <span class="fw-bold text-primary">{{ result.analytics.data_points }} days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+
+                        <!-- Location Information -->
+                        {% if result.local_info %}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-map-marker-alt me-2"></i>Location Details:</h6>
+                                {% for info in result.local_info %}
+                                    <p class="mb-1">{{ info }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-database me-2"></i>Data Source:</h6>
+                                <p class="mb-1">{{ result.data_source }}</p>
+                                <small class="text-muted">Last updated: {{ result.timestamp }}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Risk Score Details (for risk calculator module) -->
+            {% if result.total_score is defined and result.max_score %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-calculator me-2"></i>
+                            Environmental Risk Score Analysis
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <h2 class="display-4 text-{{ result.risk_color }}">
+                                        {{ result.total_score }}/{{ result.max_score }}
+                                    </h2>
+                                    <p class="lead">Risk Score</p>
+                                    {% if result.risk_percentage %}
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-{{ result.risk_color }}" 
+                                                 style="width: {{ result.risk_percentage }}%">
+                                                {{ result.risk_percentage }}%
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                {% if result.present_factors %}
+                                    <h6>Risk Factors Identified:</h6>
+                                    {% if result.high_risk_factors %}
+                                        <h6 class="text-danger small">High Risk (3 points each):</h6>
+                                        {% for factor in result.high_risk_factors %}
+                                            <span class="badge bg-danger me-1">{{ factor.description }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if result.medium_risk_factors %}
+                                        <h6 class="text-warning small mt-2">Medium Risk (2 points each):</h6>
+                                        {% for factor in result.medium_risk_factors %}
+                                            <span class="badge bg-warning text-dark me-1">{{ factor.description }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if result.low_risk_factors %}
+                                        <h6 class="text-info small mt-2">Low Risk (1 point each):</h6>
+                                        {% for factor in result.low_risk_factors %}
+                                            <span class="badge bg-info me-1">{{ factor.description }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Risk Factors (for weather prediction module) -->
+            {% if result.risk_factors %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list-ul me-2"></i>
+                            Climate Risk Factors
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {% for factor in result.risk_factors %}
+                                <li class="list-group-item">
+                                    <i class="fas fa-dot-circle text-{{ result.risk_color }} me-2"></i>
+                                    {{ factor }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Recommendations -->
+            {% if result.recommendations %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            Recommended Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if result.priority_actions %}
+                                    <h6 class="text-danger">Priority Actions:</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for action in result.priority_actions %}
+                                            <li class="list-group-item border-0 px-0">
+                                                <i class="fas fa-exclamation-circle text-danger me-2"></i>
+                                                {{ action }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <h6>Immediate Recommendations:</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for recommendation in result.recommendations %}
+                                            <li class="list-group-item border-0 px-0">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                {{ recommendation }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                            {% if result.detailed_recommendations %}
+                                <div class="col-md-6">
+                                    <h6>Detailed Guidelines:</h6>
+                                    <div class="accordion" id="detailedRecommendations">
+                                        {% for recommendation in result.detailed_recommendations %}
+                                            {% if recommendation.startswith('🌊') or recommendation.startswith('🦟') or recommendation.startswith('💧') or recommendation.startswith('🌱') or recommendation.startswith('🏠') or recommendation.startswith('⚡') %}
+                                                <div class="card">
+                                                    <div class="card-header p-2">
+                                                        <h6 class="mb-0">{{ recommendation }}</h6>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <small class="d-block">{{ recommendation }}</small>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Doctor Consultation Recommendation -->
+            {% if result.risk_level in ['High', 'Very High', 'Medium'] or (result.present_symptoms and result.present_symptoms|length >= 2) %}
+                <div class="card mb-4 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user-md me-2"></i>
+                            Doctor Consultation Recommended
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% if result.risk_level in ['High', 'Very High'] or (result.present_symptoms and result.present_symptoms|length >= 4) %}
+                            <div class="alert alert-danger" role="alert">
+                                <h6 class="alert-heading">🚨 Immediate Medical Attention Required</h6>
+                                <p class="mb-2">Your risk assessment indicates the need for immediate medical consultation.</p>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="tel:108" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-phone"></i> Emergency: 108
+                                    </a>
+                                    <a href="tel:104" class="btn btn-warning btn-sm text-dark">
+                                        <i class="fas fa-phone"></i> Health Helpline: 104
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning text-dark" role="alert">
+                                <h6 class="alert-heading">⚠️ Medical Consultation Recommended</h6>
+                                <p class="mb-0">Consider consulting a doctor within 24-48 hours for proper evaluation.</p>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-8">
+                                <h6>Available Options:</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-info me-2"></i>
+                                        <strong>Local Doctors:</strong> Find specialists in your city
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-video text-success me-2"></i>
+                                        <strong>Telemedicine:</strong> Online consultation available 24/7
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-phone text-primary me-2"></i>
+                                        <strong>Emergency Services:</strong> Immediate help when needed
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <a href="/doctor/book-consultation?city={{ result.weather_data.city if result.weather_data else 'Bangalore' }}&risk_level={{ result.risk_level }}&symptoms_count={{ result.present_symptoms|length if result.present_symptoms else 0 }}" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calendar-check me-2"></i>
+                                    Book Consultation
+                                </a>
+                                <p class="small text-muted mt-2">View doctors & telemedicine options</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h6>Quick Actions:</h6>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="https://www.practo.com/online-doctor-consultation" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-external-link-alt me-1"></i> Practo Online
+                                    </a>
+                                    <a href="https://www.apollo247.com/consult-online" target="_blank" class="btn btn-outline-success btn-sm">
+                                        <i class="fas fa-external-link-alt me-1"></i> Apollo 24/7
+                                    </a>
+                                    <a href="https://www.1mg.com/online-doctor-consultation" target="_blank" class="btn btn-outline-info btn-sm">
+                                        <i class="fas fa-external-link-alt me-1"></i> 1mg Consult
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Next Steps -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-route me-2"></i>
+                        Next Steps
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-redo fa-2x text-primary mb-3"></i>
+                                    <h6>Monitor Regularly</h6>
+                                    <p class="small">Check your risk status weekly</p>
+                                    <a href="{{ back_url }}" class="btn btn-outline-primary btn-sm">
+                                        Reassess Risk
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-shield-alt fa-2x text-success mb-3"></i>
+                                    <h6>Prevention Guide</h6>
+                                    <p class="small">Learn comprehensive prevention</p>
+                                    <a href="{{ url_for('prevention') }}" class="btn btn-outline-success btn-sm">
+                                        View Prevention
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-chart-line fa-2x text-info mb-3"></i>
+                                    <h6>Data Analytics</h6>
+                                    <p class="small">View trends and patterns</p>
+                                    <a href="{{ url_for('visualization') }}" class="btn btn-outline-info btn-sm">
+                                        View Analytics
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ back_url }}" class="btn btn-outline-secondary btn-lg w-100">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        New Assessment
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-home me-2"></i>
+                        Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Print functionality
+function printResult() {
+    window.print();
+}
+
+// Share functionality (basic)
+function shareResult() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Dengue Risk Assessment Result',
+            text: 'My dengue risk assessment shows {{ result.risk_level }} risk level.',
+            url: window.location.href
+        });
+    } else {
+        // Fallback - copy to clipboard
+        navigator.clipboard.writeText(window.location.href).then(function() {
+            alert('Link copied to clipboard!');
+        });
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+Date,City,District,State,Cases,Latitude,Longitude
+2025-11-28,Bangalore,Bangalore Urban,Karnataka,45,12.9716,77.5946
+2025-11-28,Mysore,Mysore,Karnataka,23,12.2958,76.6394
+2025-11-28,Hubli,Dharwad,Karnataka,18,15.3647,75.124
+2025-11-28,Mangalore,Dakshina Kannada,Karnataka,31,12.9141,74.856
+2025-11-28,Belgaum,Belgaum,Karnataka,15,15.8497,74.4977
+2025-11-28,Tumkur,Tumkur,Karnataka,12,13.3422,77.101
+2025-11-28,Davangere,Davanagere,Karnataka,8,14.464,75.9218
+2025-11-28,Bellary,Ballari,Karnataka,22,15.1394,76.9214
+2025-11-28,Bijapur,Vijayapura,Karnataka,14,16.8302,75.7100
+2025-11-28,Shimoga,Shivamogga,Karnataka,19,13.9299,75.5681
+2025-11-28,Gulbarga,Kalaburagi,Karnataka,26,17.3297,76.8343
+2025-11-28,Hassan,Hassan,Karnataka,11,13.0033,76.0953
+2025-11-27,Bangalore,Bangalore Urban,Karnataka,52,12.9716,77.5946
+2025-11-27,Mysore,Mysore,Karnataka,28,12.2958,76.6394
+2025-11-27,Hubli,Dharwad,Karnataka,21,15.3647,75.124
+2025-11-27,Mangalore,Dakshina Kannada,Karnataka,36,12.9141,74.856
+2025-11-27,Belgaum,Belgaum,Karnataka,17,15.8497,74.4977
+2025-11-27,Tumkur,Tumkur,Karnataka,15,13.3422,77.101
+2025-11-27,Davangere,Davanagere,Karnataka,10,14.464,75.9218
+2025-11-27,Bellary,Ballari,Karnataka,25,15.1394,76.9214
+2025-11-27,Bijapur,Vijayapura,Karnataka,16,16.8302,75.7100
+2025-11-27,Shimoga,Shivamogga,Karnataka,22,13.9299,75.5681
+2025-11-27,Gulbarga,Kalaburagi,Karnataka,29,17.3297,76.8343
+2025-11-27,Hassan,Hassan,Karnataka,13,13.0033,76.0953
+2025-11-26,Bangalore,Bangalore Urban,Karnataka,48,12.9716,77.5946
+2025-11-26,Mysore,Mysore,Karnataka,25,12.2958,76.6394
+2025-11-26,Hubli,Dharwad,Karnataka,19,15.3647,75.124
+2025-11-26,Mangalore,Dakshina Kannada,Karnataka,33,12.9141,74.856
+2025-11-26,Belgaum,Belgaum,Karnataka,14,15.8497,74.4977
+2025-11-26,Tumkur,Tumkur,Karnataka,13,13.3422,77.101
+2025-11-26,Davangere,Davanagere,Karnataka,7,14.464,75.9218
+2025-11-26,Bellary,Ballari,Karnataka,20,15.1394,76.9214
+2025-11-26,Bijapur,Vijayapura,Karnataka,12,16.8302,75.7100
+2025-11-26,Shimoga,Shivamogga,Karnataka,18,13.9299,75.5681
+2025-11-26,Gulbarga,Kalaburagi,Karnataka,24,17.3297,76.8343
+2025-11-26,Hassan,Hassan,Karnataka,9,13.0033,76.0953
+2025-11-25,Bangalore,Bangalore Urban,Karnataka,41,12.9716,77.5946
+2025-11-25,Mysore,Mysore,Karnataka,20,12.2958,76.6394
+2025-11-25,Hubli,Dharwad,Karnataka,16,15.3647,75.124
+2025-11-25,Mangalore,Dakshina Kannada,Karnataka,28,12.9141,74.856
+2025-11-25,Belgaum,Belgaum,Karnataka,12,15.8497,74.4977
+2025-11-25,Tumkur,Tumkur,Karnataka,10,13.3422,77.101
+2025-11-25,Davangere,Davanagere,Karnataka,6,14.464,75.9218
+2025-11-25,Bellary,Ballari,Karnataka,18,15.1394,76.9214
+2025-11-25,Bijapur,Vijayapura,Karnataka,10,16.8302,75.7100
+2025-11-25,Shimoga,Shivamogga,Karnataka,15,13.9299,75.5681
+2025-11-25,Gulbarga,Kalaburagi,Karnataka,21,17.3297,76.8343
+2025-11-25,Hassan,Hassan,Karnataka,8,13.0033,76.0953
+2025-11-24,Bangalore,Bangalore Urban,Karnataka,39,12.9716,77.5946
+2025-11-24,Mysore,Mysore,Karnataka,18,12.2958,76.6394
+2025-11-24,Hubli,Dharwad,Karnataka,14,15.3647,75.124
+2025-11-24,Mangalore,Dakshina Kannada,Karnataka,25,12.9141,74.856
+2025-11-24,Belgaum,Belgaum,Karnataka,11,15.8497,74.4977
+2025-11-24,Tumkur,Tumkur,Karnataka,9,13.3422,77.101
+2025-11-24,Davangere,Davanagere,Karnataka,5,14.464,75.9218
+2025-11-24,Bellary,Ballari,Karnataka,16,15.1394,76.9214
+2025-11-24,Bijapur,Vijayapura,Karnataka,8,16.8302,75.7100
+2025-11-24,Shimoga,Shivamogga,Karnataka,13,13.9299,75.5681
+2025-11-24,Gulbarga,Kalaburagi,Karnataka,19,17.3297,76.8343
+2025-11-24,Hassan,Hassan,Karnataka,7,13.0033,76.0953
+2025-11-23,Bangalore,Bangalore Urban,Karnataka,44,12.9716,77.5946
+2025-11-23,Mysore,Mysore,Karnataka,22,12.2958,76.6394
+2025-11-23,Hubli,Dharwad,Karnataka,17,15.3647,75.124
+2025-11-23,Mangalore,Dakshina Kannada,Karnataka,30,12.9141,74.856
+2025-11-23,Belgaum,Belgaum,Karnataka,13,15.8497,74.4977
+2025-11-23,Tumkur,Tumkur,Karnataka,11,13.3422,77.101
+2025-11-23,Davangere,Davanagere,Karnataka,7,14.464,75.9218
+2025-11-23,Bellary,Ballari,Karnataka,19,15.1394,76.9214
+2025-11-23,Bijapur,Vijayapura,Karnataka,11,16.8302,75.7100
+2025-11-23,Shimoga,Shivamogga,Karnataka,16,13.9299,75.5681
+2025-11-23,Gulbarga,Kalaburagi,Karnataka,23,17.3297,76.8343
+2025-11-23,Hassan,Hassan,Karnataka,9,13.0033,76.0953
+2025-11-22,Bangalore,Bangalore Urban,Karnataka,37,12.9716,77.5946
+2025-11-22,Mysore,Mysore,Karnataka,15,12.2958,76.6394
+2025-11-22,Hubli,Dharwad,Karnataka,12,15.3647,75.124
+2025-11-22,Mangalore,Dakshina Kannada,Karnataka,22,12.9141,74.856
+2025-11-22,Belgaum,Belgaum,Karnataka,9,15.8497,74.4977
+2025-11-22,Tumkur,Tumkur,Karnataka,8,13.3422,77.101
+2025-11-22,Davangere,Davanagere,Karnataka,4,14.464,75.9218
+2025-11-22,Bellary,Ballari,Karnataka,14,15.1394,76.9214
+2025-11-22,Bijapur,Vijayapura,Karnataka,7,16.8302,75.7100
+2025-11-22,Shimoga,Shivamogga,Karnataka,11,13.9299,75.5681
+2025-11-22,Gulbarga,Kalaburagi,Karnataka,17,17.3297,76.8343
+2025-11-22,Hassan,Hassan,Karnataka,6,13.0033,76.0953
+2025-11-21,Bangalore,Bangalore Urban,Karnataka,42,12.9716,77.5946
+2025-11-21,Mysore,Mysore,Karnataka,19,12.2958,76.6394
+2025-11-21,Hubli,Dharwad,Karnataka,15,15.3647,75.124
+2025-11-21,Mangalore,Dakshina Kannada,Karnataka,27,12.9141,74.856
+2025-11-21,Belgaum,Belgaum,Karnataka,12,15.8497,74.4977
+2025-11-21,Tumkur,Tumkur,Karnataka,10,13.3422,77.101
+2025-11-21,Davangere,Davanagere,Karnataka,6,14.464,75.9218
+2025-11-21,Bellary,Ballari,Karnataka,17,15.1394,76.9214
+2025-11-21,Bijapur,Vijayapura,Karnataka,9,16.8302,75.7100
+2025-11-21,Shimoga,Shivamogga,Karnataka,14,13.9299,75.5681
+2025-11-21,Gulbarga,Kalaburagi,Karnataka,20,17.3297,76.8343
+2025-11-21,Hassan,Hassan,Karnataka,8,13.0033,76.0953
+2025-11-20,Bangalore,Bangalore Urban,Karnataka,35,12.9716,77.5946
+2025-11-20,Mysore,Mysore,Karnataka,14,12.2958,76.6394
+2025-11-20,Hubli,Dharwad,Karnataka,11,15.3647,75.124
+2025-11-20,Mangalore,Dakshina Kannada,Karnataka,20,12.9141,74.856
+2025-11-20,Belgaum,Belgaum,Karnataka,8,15.8497,74.4977
+2025-11-20,Tumkur,Tumkur,Karnataka,7,13.3422,77.101
+2025-11-20,Davangere,Davanagere,Karnataka,3,14.464,75.9218
+2025-11-20,Bellary,Ballari,Karnataka,12,15.1394,76.9214
+2025-11-20,Bijapur,Vijayapura,Karnataka,6,16.8302,75.7100
+2025-11-20,Shimoga,Shivamogga,Karnataka,9,13.9299,75.5681
+2025-11-20,Gulbarga,Kalaburagi,Karnataka,15,17.3297,76.8343
+2025-11-20,Hassan,Hassan,Karnataka,5,13.0033,76.0953
+2025-11-19,Bangalore,Bangalore Urban,Karnataka,38,12.9716,77.5946
+2025-11-19,Mysore,Mysore,Karnataka,16,12.2958,76.6394
+2025-11-19,Hubli,Dharwad,Karnataka,13,15.3647,75.124
+2025-11-19,Mangalore,Dakshina Kannada,Karnataka,24,12.9141,74.856
+2025-11-19,Belgaum,Belgaum,Karnataka,10,15.8497,74.4977
+2025-11-19,Tumkur,Tumkur,Karnataka,8,13.3422,77.101
+2025-11-19,Davangere,Davanagere,Karnataka,4,14.464,75.9218
+2025-11-19,Bellary,Ballari,Karnataka,15,15.1394,76.9214
+2025-11-19,Bijapur,Vijayapura,Karnataka,7,16.8302,75.7100
+2025-11-19,Shimoga,Shivamogga,Karnataka,12,13.9299,75.5681
+2025-11-19,Gulbarga,Kalaburagi,Karnataka,18,17.3297,76.8343
+2025-11-19,Hassan,Hassan,Karnataka,6,13.0033,76.0953
+2025-11-18,Bangalore,Bangalore Urban,Karnataka,33,12.9716,77.5946
+2025-11-18,Mysore,Mysore,Karnataka,12,12.2958,76.6394
+2025-11-18,Hubli,Dharwad,Karnataka,9,15.3647,75.124
+2025-11-18,Mangalore,Dakshina Kannada,Karnataka,18,12.9141,74.856
+2025-11-18,Belgaum,Belgaum,Karnataka,7,15.8497,74.4977
+2025-11-18,Tumkur,Tumkur,Karnataka,6,13.3422,77.101
+2025-11-18,Davangere,Davanagere,Karnataka,2,14.464,75.9218
+2025-11-18,Bellary,Ballari,Karnataka,10,15.1394,76.9214
+2025-11-18,Bijapur,Vijayapura,Karnataka,5,16.8302,75.7100
+2025-11-18,Shimoga,Shivamogga,Karnataka,8,13.9299,75.5681
+2025-11-18,Gulbarga,Kalaburagi,Karnataka,13,17.3297,76.8343
+2025-11-18,Hassan,Hassan,Karnataka,4,13.0033,76.0953
+2025-11-17,Bangalore,Bangalore Urban,Karnataka,40,12.9716,77.5946
+2025-11-17,Mysore,Mysore,Karnataka,17,12.2958,76.6394
+2025-11-17,Hubli,Dharwad,Karnataka,14,15.3647,75.124
+2025-11-17,Mangalore,Dakshina Kannada,Karnataka,26,12.9141,74.856
+2025-11-17,Belgaum,Belgaum,Karnataka,11,15.8497,74.4977
+2025-11-17,Tumkur,Tumkur,Karnataka,9,13.3422,77.101
+2025-11-17,Davangere,Davanagere,Karnataka,5,14.464,75.9218
+2025-11-17,Bellary,Ballari,Karnataka,16,15.1394,76.9214
+2025-11-17,Bijapur,Vijayapura,Karnataka,8,16.8302,75.7100
+2025-11-17,Shimoga,Shivamogga,Karnataka,13,13.9299,75.5681
+2025-11-17,Gulbarga,Kalaburagi,Karnataka,19,17.3297,76.8343
+2025-11-17,Hassan,Hassan,Karnataka,7,13.0033,76.0953
+2025-11-16,Bangalore,Bangalore Urban,Karnataka,36,12.9716,77.5946
+2025-11-16,Mysore,Mysore,Karnataka,13,12.2958,76.6394
+2025-11-16,Hubli,Dharwad,Karnataka,10,15.3647,75.124
+2025-11-16,Mangalore,Dakshina Kannada,Karnataka,21,12.9141,74.856
+2025-11-16,Belgaum,Belgaum,Karnataka,8,15.8497,74.4977
+2025-11-16,Tumkur,Tumkur,Karnataka,7,13.3422,77.101
+2025-11-16,Davangere,Davanagere,Karnataka,3,14.464,75.9218
+2025-11-16,Bellary,Ballari,Karnataka,13,15.1394,76.9214
+2025-11-16,Bijapur,Vijayapura,Karnataka,6,16.8302,75.7100
+2025-11-16,Shimoga,Shivamogga,Karnataka,10,13.9299,75.5681
+2025-11-16,Gulbarga,Kalaburagi,Karnataka,16,17.3297,76.8343
+2025-11-16,Hassan,Hassan,Karnataka,5,13.0033,76.0953
+2025-11-15,Bangalore,Bangalore Urban,Karnataka,43,12.9716,77.5946
+2025-11-15,Mysore,Mysore,Karnataka,21,12.2958,76.6394
+2025-11-15,Hubli,Dharwad,Karnataka,16,15.3647,75.124
+2025-11-15,Mangalore,Dakshina Kannada,Karnataka,29,12.9141,74.856
+2025-11-15,Belgaum,Belgaum,Karnataka,14,15.8497,74.4977
+2025-11-15,Tumkur,Tumkur,Karnataka,12,13.3422,77.101
+2025-11-15,Davangere,Davanagere,Karnataka,8,14.464,75.9218
+2025-11-15,Bellary,Ballari,Karnataka,18,15.1394,76.9214
+2025-11-15,Bijapur,Vijayapura,Karnataka,12,16.8302,75.7100
+2025-11-15,Shimoga,Shivamogga,Karnataka,17,13.9299,75.5681
+2025-11-15,Gulbarga,Kalaburagi,Karnataka,25,17.3297,76.8343
+2025-11-15,Hassan,Hassan,Karnataka,10,13.0033,76.0953
